@@ -119,7 +119,7 @@ public class UserRegistration {
 	 */
 	private static boolean isValidPassword(String password)
 	{
-		if(isPasswordRightLength(password)==false || hasPassUpperCase(password)==false)
+		if(isPasswordRightLength(password)==false || hasPassUpperCase(password)==false || hasPassNo(password)==false)
 		{
 			System.out.println("Invalid Password.");
 			return false;
@@ -152,6 +152,21 @@ public class UserRegistration {
 		if(Pattern.matches(".*[A-Z]+.*", password)==false)
 		{
 			System.out.println("Password should have atleast one capital letter.");
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * @param password
+	 * @return
+	 * Validates password. Should have atleast 1 number.
+	 */
+	private static boolean hasPassNo(String password)
+	{
+		if(Pattern.matches(".*[0-9]+.*", password)==false)
+		{
+			System.out.println("Password should have atleast one number.");
 			return false;
 		}
 		return true;
