@@ -21,11 +21,17 @@ public class UserRegistration {
 	private static void inputUserDetails()
 	{
 		String firstName;
+		String lastName;
 		do
 		{
 			System.out.print("Enter first name: ");
 			firstName = in.nextLine();
 		}while(isValidFirstName(firstName)==false);
+		do
+		{
+			System.out.print("Enter last name: ");
+			lastName = in.nextLine();
+		}while(isValidLastName(lastName)==false);
 	}
 	
 	/**
@@ -38,6 +44,16 @@ public class UserRegistration {
 		if(Pattern.matches("[A-Z][a-z]{2,}", firstName)==false)
 		{
 			System.out.println("Invalid First Name.");
+			return false;
+		}
+		return true;
+	}
+	
+	private static boolean isValidLastName(String lastName)
+	{
+		if(Pattern.matches("[A-Z][a-z]{2,}", lastName)==false)
+		{
+			System.out.println("Invalid Last Name.");
 			return false;
 		}
 		return true;
