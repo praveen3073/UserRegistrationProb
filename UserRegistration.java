@@ -23,6 +23,7 @@ public class UserRegistration {
 		String firstName;
 		String lastName;
 		String email;
+		String mobileNo;
 		do
 		{
 			System.out.print("Enter first name: ");
@@ -35,9 +36,14 @@ public class UserRegistration {
 		}while(isValidLastName(lastName)==false);
 		do
 		{
-			System.out.print("Enter Email: ");
+			System.out.print("Enter email: ");
 			email = in.nextLine();
 		}while(isValidEmail(email)==false);
+		do
+		{
+			System.out.print("Enter mobile number: ");
+			mobileNo = in.nextLine();
+		}while(isValidMobileNo(mobileNo)==false);
 	}
 	
 	/**
@@ -80,6 +86,21 @@ public class UserRegistration {
 		if(Pattern.matches("[a-z]+(.[a-z]+)?@bl.co(.in)?", email)==false)
 		{
 			System.out.println("Invalid Email.");
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * @param mobileNo
+	 * @return
+	 * Validates mobileNo, pattern ## ##########
+	 */
+	private static boolean isValidMobileNo(String mobileNo)
+	{
+		if(Pattern.matches("[0-9]{2}\\s[0-9]{10}", mobileNo)==false)
+		{
+			System.out.println("Invalid Mobile Number.");
 			return false;
 		}
 		return true;
