@@ -24,6 +24,7 @@ public class UserRegistration {
 		String lastName;
 		String email;
 		String mobileNo;
+		String password;
 		do
 		{
 			System.out.print("Enter first name: ");
@@ -44,6 +45,11 @@ public class UserRegistration {
 			System.out.print("Enter mobile number: ");
 			mobileNo = in.nextLine();
 		}while(isValidMobileNo(mobileNo)==false);
+		do
+		{
+			System.out.print("Enter password: ");
+			password = in.nextLine();
+		}while(isValidPassword(password)==false);
 	}
 	
 	/**
@@ -101,6 +107,36 @@ public class UserRegistration {
 		if(Pattern.matches("[0-9]{2}\\s[0-9]{10}", mobileNo)==false)
 		{
 			System.out.println("Invalid Mobile Number.");
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * @param password
+	 * @return
+	 * Validates password
+	 */
+	private static boolean isValidPassword(String password)
+	{
+		if(isPasswordRightLength(password)==false)
+		{
+			System.out.println("Invalid Password.");
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * @param password
+	 * @return
+	 * Validates password. Min char length should be 8.
+	 */
+	private static boolean isPasswordRightLength(String password)
+	{
+		if(Pattern.matches(".{8,}", password)==false)
+		{
+			System.out.println("Password length less than 8.");
 			return false;
 		}
 		return true;
