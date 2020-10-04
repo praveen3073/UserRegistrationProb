@@ -85,11 +85,11 @@ public class UserRegistration {
 	/**
 	 * @param email
 	 * @return
-	 * Validates email, pattern abc.xyz@bl.co.in with .xyz & .in optional
+	 * Validates email by calling isValidEmailAllCases()
 	 */
 	private static boolean isValidEmail(String email)
 	{
-		if(Pattern.matches("[a-z]+(.[a-z]+)?@bl.co(.in)?", email)==false)
+		if(isValidEmailAllCases(email)==false)
 		{
 			System.out.println("Invalid Email.");
 			return false;
@@ -186,5 +186,39 @@ public class UserRegistration {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * @param email
+	 * @return
+	 * Validates email for all given test cases
+	 */
+	private static boolean isValidEmailAllCases(String email)
+	{
+		if(Pattern.matches(".+[@].+", email)==false)
+			System.out.println("Email must contain '@'");
+		else if(Pattern.matches(".+@\\..+", email)==true)
+			System.out.println("TId can't start with '.'");
+		else if(Pattern.matches(".+\\..{2,}", email)==false)
+			System.out.println("Last tId should have atleast 2 characters");
+		else if(Pattern.matches("\\..+", email)==true)
+			System.out.println("First character of email can't be '.'");
+		else if(Pattern.matches("[.a-z0-9_-]+@.+", email)==false)
+			System.out.println("Email can only have character, digit, '_' and '-'");
+		else if(Pattern.matches(".+@[a-z0-9.]+", email)==false)
+			System.out.println("Email's tId can only have characters and digits");
+		else if(Pattern.matches(".+\\.\\..+", email)==true)
+			System.out.println("Double dots not allowed");
+		else if(Pattern.matches(".+\\.@.+", email)==true)
+			System.out.println("Email's last character can't end with '.'");
+		else if(Pattern.matches(".*@.*@.*", email)==true)
+			System.out.println("Double '@' is not allowed");
+		else if(Pattern.matches(".*\\.[a-z]{2}", email)==false && Pattern.matches(".*\\.[a-z0-9]{3,}", email)==false)
+			System.out.println("Email's tId which contains 2 characters can't have digits");
+		else if(Pattern.matches(".*@[^.]+\\.[^.]+\\.[^.]+\\..+", email)==true)
+			System.out.println("Can't have multiple tId");
+		else
+			return true;
+		return  false;
 	}
 }
