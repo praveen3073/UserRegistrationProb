@@ -50,6 +50,7 @@ public class UserRegistration {
 			System.out.print("Enter password: ");
 			password = in.nextLine();
 		}while(isValidPassword(password)==false);
+		System.out.println("-----User Registration Successful-----");
 	}
 	
 	/**
@@ -57,7 +58,7 @@ public class UserRegistration {
 	 * @return
 	 * Validates firstName, first char capital & min three char
 	 */
-	private static boolean isValidFirstName(String firstName)
+	static boolean isValidFirstName(String firstName)
 	{
 		if(Pattern.matches("[A-Z][a-z]{2,}", firstName)==false)
 		{
@@ -72,7 +73,7 @@ public class UserRegistration {
 	 * @return
 	 * Validates lastName, first char capital & min three char
 	 */
-	private static boolean isValidLastName(String lastName)
+	static boolean isValidLastName(String lastName)
 	{
 		if(Pattern.matches("[A-Z][a-z]{2,}", lastName)==false)
 		{
@@ -87,7 +88,7 @@ public class UserRegistration {
 	 * @return
 	 * Validates email by calling isValidEmailAllCases()
 	 */
-	private static boolean isValidEmail(String email)
+	static boolean isValidEmail(String email)
 	{
 		if(isValidEmailAllCases(email)==false)
 		{
@@ -102,7 +103,7 @@ public class UserRegistration {
 	 * @return
 	 * Validates mobileNo, pattern ## ##########
 	 */
-	private static boolean isValidMobileNo(String mobileNo)
+	static boolean isValidMobileNo(String mobileNo)
 	{
 		if(Pattern.matches("[0-9]{2}\\s[0-9]{10}", mobileNo)==false)
 		{
@@ -117,7 +118,7 @@ public class UserRegistration {
 	 * @return
 	 * Validates password
 	 */
-	private static boolean isValidPassword(String password)
+	static boolean isValidPassword(String password)
 	{
 		if(isPasswordRightLength(password)==false || hasPassUpperCase(password)==false || hasPassNo(password)==false 
 		|| hasPassSpecialChar(password)==false)
