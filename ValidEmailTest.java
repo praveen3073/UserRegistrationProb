@@ -3,7 +3,10 @@ package com.cg.userregistration;
 import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.Collection;
+
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -44,8 +47,17 @@ public class ValidEmailTest {
 		});
 	}
 	
+	@Rule
+	public ExpectedException expectedEx = ExpectedException.none();
+	
 	@Test
 	public void givenEmail_ShouldReturnAsPerParameterizedResult() {
-		assertEquals(expectedResult, UserRegistration.isValidEmail(emailSample));
+		if(expectedResult==true)
+			assertEquals(expectedResult, UserRegistration.isValidEmail(emailSample));
+		else
+		{
+			expectedEx.expect(InvalidEmailException.class);
+			UserRegistration.isValidEmail(emailSample);
+		}
 	}
 }

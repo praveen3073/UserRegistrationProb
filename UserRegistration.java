@@ -11,7 +11,11 @@ public class UserRegistration {
 	
 	public static void main(String[] args) {
 		System.out.println("Welcome to User Registration");
-		inputUserDetails();
+		try {
+			inputUserDetails();
+		} catch (RuntimeException e) {
+			e.getMessage();
+		}
 		in.close();
 	}
 	
@@ -25,31 +29,27 @@ public class UserRegistration {
 		String email;
 		String mobileNo;
 		String password;
-		do
-		{
-			System.out.print("Enter first name: ");
-			firstName = in.nextLine();
-		}while(isValidFirstName(firstName)==false);
-		do
-		{
-			System.out.print("Enter last name: ");
-			lastName = in.nextLine();
-		}while(isValidLastName(lastName)==false);
-		do
-		{
-			System.out.print("Enter email: ");
-			email = in.nextLine();
-		}while(isValidEmail(email)==false);
-		do
-		{
-			System.out.print("Enter mobile number: ");
-			mobileNo = in.nextLine();
-		}while(isValidMobileNo(mobileNo)==false);
-		do
-		{
-			System.out.print("Enter password: ");
-			password = in.nextLine();
-		}while(isValidPassword(password)==false);
+		
+		System.out.print("Enter first name: ");
+		firstName = in.nextLine();
+		isValidFirstName(firstName);
+		
+		System.out.print("Enter last name: ");
+		lastName = in.nextLine();
+		isValidLastName(lastName);
+		
+		System.out.print("Enter email: ");
+		email = in.nextLine();
+		isValidEmail(email);
+		
+		System.out.print("Enter mobile number: ");
+		mobileNo = in.nextLine();
+		isValidMobileNo(mobileNo);
+		
+		System.out.print("Enter password: ");
+		password = in.nextLine();
+		isValidPassword(password);
+		
 		System.out.println("-----User Registration Successful-----");
 	}
 	
@@ -62,8 +62,7 @@ public class UserRegistration {
 	{
 		if(Pattern.matches("[A-Z][a-z]{2,}", firstName)==false)
 		{
-			System.out.println("Invalid First Name.");
-			return false;
+			throw new InvalidFirstNameException("Invalid First Name Exception");
 		}
 		return true;
 	}
@@ -77,8 +76,7 @@ public class UserRegistration {
 	{
 		if(Pattern.matches("[A-Z][a-z]{2,}", lastName)==false)
 		{
-			System.out.println("Invalid Last Name.");
-			return false;
+			throw new InvalidLastNameException("Invalid Last Name Exception");
 		}
 		return true;
 	}
@@ -92,8 +90,7 @@ public class UserRegistration {
 	{
 		if(isValidEmailAllCases(email)==false)
 		{
-			System.out.println("Invalid Email.");
-			return false;
+			throw new InvalidEmailException("Invalid Email Exception");
 		}
 		return true;
 	}
@@ -107,8 +104,7 @@ public class UserRegistration {
 	{
 		if(Pattern.matches("[0-9]{2}\\s[0-9]{10}", mobileNo)==false)
 		{
-			System.out.println("Invalid Mobile Number.");
-			return false;
+			throw new InvalidMobileNoException("Invalid Mobile Number Exception");
 		}
 		return true;
 	}
@@ -123,8 +119,7 @@ public class UserRegistration {
 		if(isPasswordRightLength(password)==false || hasPassUpperCase(password)==false || hasPassNo(password)==false 
 		|| hasPassSpecialChar(password)==false)
 		{
-			System.out.println("Invalid Password.");
-			return false;
+			throw new InvalidPasswordException("Invalid Password Exception");
 		}
 		return true;
 	}

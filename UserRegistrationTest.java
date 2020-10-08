@@ -2,14 +2,25 @@ package com.cg.userregistration;
 
 import static org.junit.Assert.*;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class UserRegistrationTest {
 
+	@Rule
+	public ExpectedException expectedEx = ExpectedException.none();
+	
 	@Test
 	public void givenFirstName_WhenValid_ShouldReturnTrue() {
 		boolean result = UserRegistration.isValidFirstName("Aks");
 		assertEquals(true, result);
+	}
+	
+	@Test
+	public void givenFirstName_WhenInvalid_ShouldReturnInvalidFirstNameException() {
+		expectedEx.expect(InvalidFirstNameException.class);
+		UserRegistration.isValidFirstName("Ak");
 	}
 	
 	@Test
@@ -19,9 +30,21 @@ public class UserRegistrationTest {
 	}
 	
 	@Test
+	public void givenLastName_WhenInvalid_ShouldReturnInvalidLastNameException() {
+		expectedEx.expect(InvalidLastNameException.class);
+		UserRegistration.isValidLastName("Ak");
+	}
+	
+	@Test
 	public void givenEmail_WhenValid_ShouldReturnTrue() {
 		boolean result = UserRegistration.isValidEmail("pop3073@gmail.com");
 		assertEquals(true, result);
+	}
+	
+	@Test
+	public void givenEmail_WhenInvalid_ShouldReturnInvalidEmailException() {
+		expectedEx.expect(InvalidEmailException.class);
+		UserRegistration.isValidEmail("pop3073gmail.com");
 	}
 	
 	@Test
@@ -31,9 +54,20 @@ public class UserRegistrationTest {
 	}
 	
 	@Test
+	public void givenMobileNo_WhenInvalid_ShouldReturnInvalidMobileNoException() {
+		expectedEx.expect(InvalidMobileNoException.class);
+		UserRegistration.isValidMobileNo("91 98766");
+	}
+	
+	@Test
 	public void givenPassword_WhenValid_ShouldReturnTrue() {
 		boolean result = UserRegistration.isValidPassword("Dlk4%nnn");
 		assertEquals(true, result);
 	}
 
+	@Test
+	public void givenPassword_WhenInvalid_ShouldReturnInvalidPasswordException() {
+		expectedEx.expect(InvalidPasswordException.class);
+		UserRegistration.isValidPassword("Aksdfg3");
+	}
 }
