@@ -6,11 +6,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import junit.framework.Assert;
+
 public class UserRegistrationTest {
 
-	@Rule
-	public ExpectedException expectedEx = ExpectedException.none();
-	
 	@Test
 	public void givenFirstName_WhenValid_ShouldReturnTrue() {
 		boolean result = UserRegistration.isValidFirstName("Aks");
@@ -19,8 +18,11 @@ public class UserRegistrationTest {
 	
 	@Test
 	public void givenFirstName_WhenInvalid_ShouldReturnInvalidFirstNameException() {
-		expectedEx.expect(InvalidFirstNameException.class);
-		UserRegistration.isValidFirstName("Ak");
+		try {
+			UserRegistration.isValidFirstName("Ak");
+		} catch (InvalidFirstNameException e) {
+			assertEquals("Invalid First Name Exception", e.getMessage());
+		}
 	}
 	
 	@Test
@@ -31,8 +33,11 @@ public class UserRegistrationTest {
 	
 	@Test
 	public void givenLastName_WhenInvalid_ShouldReturnInvalidLastNameException() {
-		expectedEx.expect(InvalidLastNameException.class);
-		UserRegistration.isValidLastName("Ak");
+		try {
+			UserRegistration.isValidLastName("Ak");
+		} catch (InvalidLastNameException e) {
+			assertEquals("Invalid Last Name Exception", e.getMessage());
+		}
 	}
 	
 	@Test
@@ -43,8 +48,11 @@ public class UserRegistrationTest {
 	
 	@Test
 	public void givenEmail_WhenInvalid_ShouldReturnInvalidEmailException() {
-		expectedEx.expect(InvalidEmailException.class);
-		UserRegistration.isValidEmail("pop3073gmail.com");
+		try {
+			UserRegistration.isValidEmail("pop3073gmail.com");
+		} catch (InvalidEmailException e) {
+			assertEquals("Invalid Email Exception", e.getMessage());
+		}
 	}
 	
 	@Test
@@ -55,8 +63,11 @@ public class UserRegistrationTest {
 	
 	@Test
 	public void givenMobileNo_WhenInvalid_ShouldReturnInvalidMobileNoException() {
-		expectedEx.expect(InvalidMobileNoException.class);
-		UserRegistration.isValidMobileNo("91 98766");
+		try {
+			UserRegistration.isValidMobileNo("91 98766");
+		} catch(InvalidMobileNoException e) {
+			assertEquals("Invalid Mobile Number Exception", e.getMessage());
+		}
 	}
 	
 	@Test
@@ -67,7 +78,10 @@ public class UserRegistrationTest {
 
 	@Test
 	public void givenPassword_WhenInvalid_ShouldReturnInvalidPasswordException() {
-		expectedEx.expect(InvalidPasswordException.class);
-		UserRegistration.isValidPassword("Aksdfg3");
+		try {
+			UserRegistration.isValidPassword("Aksdfg3");
+		} catch (InvalidPasswordException e) {
+			assertEquals("Invalid Password Exception", e.getMessage());
+		}
 	}
 }
