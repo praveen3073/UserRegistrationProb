@@ -14,7 +14,7 @@ public class UserRegistration {
 		try {
 			inputUserDetails();
 		} catch (RuntimeException e) {
-			e.getMessage();
+			e.printStackTrace();
 		}
 		in.close();
 	}
@@ -30,25 +30,45 @@ public class UserRegistration {
 		String mobileNo;
 		String password;
 		
-		System.out.print("Enter first name: ");
-		firstName = in.nextLine();
-		isValidFirstName(firstName);
+		try {
+			System.out.print("Enter first name: ");
+			firstName = in.nextLine();
+			isValidFirstName(firstName);
+		} catch(InvalidFirstNameException e) {
+			System.out.println(e.getMessage());
+		}
 		
-		System.out.print("Enter last name: ");
-		lastName = in.nextLine();
-		isValidLastName(lastName);
+		try {
+			System.out.print("Enter last name: ");
+			lastName = in.nextLine();
+			isValidLastName(lastName);
+		} catch(InvalidLastNameException e) {
+			System.out.println(e.getMessage());
+		}
 		
-		System.out.print("Enter email: ");
-		email = in.nextLine();
-		isValidEmail(email);
+		try {
+			System.out.print("Enter email: ");
+			email = in.nextLine();
+			isValidEmail(email);
+		} catch(InvalidEmailException e) {
+			System.out.println(e.getMessage());
+		}
 		
-		System.out.print("Enter mobile number: ");
-		mobileNo = in.nextLine();
-		isValidMobileNo(mobileNo);
+		try {
+			System.out.print("Enter mobile number: ");
+			mobileNo = in.nextLine();
+			isValidMobileNo(mobileNo);
+		} catch(InvalidMobileNoException e) {
+			System.out.println(e.getMessage());
+		}
 		
-		System.out.print("Enter password: ");
-		password = in.nextLine();
-		isValidPassword(password);
+		try {
+			System.out.print("Enter password: ");
+			password = in.nextLine();
+			isValidPassword(password);
+		} catch(InvalidPasswordException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		System.out.println("-----User Registration Successful-----");
 	}

@@ -47,17 +47,17 @@ public class ValidEmailTest {
 		});
 	}
 	
-	@Rule
-	public ExpectedException expectedEx = ExpectedException.none();
-	
 	@Test
 	public void givenEmail_ShouldReturnAsPerParameterizedResult() {
 		if(expectedResult==true)
 			assertEquals(expectedResult, UserRegistration.isValidEmail(emailSample));
 		else
 		{
-			expectedEx.expect(InvalidEmailException.class);
-			UserRegistration.isValidEmail(emailSample);
+			try {
+				UserRegistration.isValidEmail(emailSample);
+			} catch (InvalidEmailException e) {
+				assertEquals("Invalid Email Exception", e.getMessage());
+			}
 		}
 	}
 }
