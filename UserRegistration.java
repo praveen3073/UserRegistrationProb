@@ -2,6 +2,11 @@ package com.cg.userregistration;
 import java.util.*;
 import java.util.regex.Pattern;
 
+@FunctionalInterface
+interface userInputValidation {
+	boolean validateUserInput(String userInput);
+}
+
 /**
  * @author Praveen Satya
  * Program validates user registration using regex	
@@ -29,11 +34,16 @@ public class UserRegistration {
 		String email;
 		String mobileNo;
 		String password;
+		userInputValidation firstNameValidation = input -> isValidFirstName(input);
+		userInputValidation lastNameValidation = input -> isValidLastName(input);
+		userInputValidation emailValidation = input -> isValidEmail(input);
+		userInputValidation mobileNoValidation = input -> isValidMobileNo(input);
+		userInputValidation passwordValidation = input -> isValidPassword(input);
 		
 		try {
 			System.out.print("Enter first name: ");
 			firstName = in.nextLine();
-			isValidFirstName(firstName);
+			firstNameValidation.validateUserInput(firstName);
 		} catch(InvalidFirstNameException e) {
 			System.out.println(e.getMessage());
 		}
@@ -41,7 +51,7 @@ public class UserRegistration {
 		try {
 			System.out.print("Enter last name: ");
 			lastName = in.nextLine();
-			isValidLastName(lastName);
+			lastNameValidation.validateUserInput(lastName);
 		} catch(InvalidLastNameException e) {
 			System.out.println(e.getMessage());
 		}
@@ -49,7 +59,7 @@ public class UserRegistration {
 		try {
 			System.out.print("Enter email: ");
 			email = in.nextLine();
-			isValidEmail(email);
+			emailValidation.validateUserInput(email);
 		} catch(InvalidEmailException e) {
 			System.out.println(e.getMessage());
 		}
@@ -57,7 +67,7 @@ public class UserRegistration {
 		try {
 			System.out.print("Enter mobile number: ");
 			mobileNo = in.nextLine();
-			isValidMobileNo(mobileNo);
+			mobileNoValidation.validateUserInput(mobileNo);
 		} catch(InvalidMobileNoException e) {
 			System.out.println(e.getMessage());
 		}
@@ -65,7 +75,7 @@ public class UserRegistration {
 		try {
 			System.out.print("Enter password: ");
 			password = in.nextLine();
-			isValidPassword(password);
+			passwordValidation.validateUserInput(password);
 		} catch(InvalidPasswordException e) {
 			System.out.println(e.getMessage());
 		}
